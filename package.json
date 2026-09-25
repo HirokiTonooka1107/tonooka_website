@@ -1,0 +1,25 @@
+{
+  "name": "tonooka_website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "astro dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HirokiTonooka1107/tonooka_website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/HirokiTonooka1107/tonooka_website/issues"
+  },
+  "homepage": "https://github.com/HirokiTonooka1107/tonooka_website#readme",
+  "dependencies": {
+    "astro": "^7.3.5"
+  }
+}
