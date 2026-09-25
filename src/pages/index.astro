@@ -1,0 +1,653 @@
+---
+// src/pages/index.astro
+const pageTitle = "有限会社 殿岡工務店 | 静岡市の水道設備・給排水工事・リフォーム・採用情報";
+const siteDescription = "静岡市の有限会社殿岡工務店。創業50年、静岡市上下水道局指定工事店として、水回りリフォーム、給排水・衛生工事、水道本管工事から採用情報まで確かな技術でお応えします。";
+const siteUrl = "https://example.com/"; // 本番のURLに変更してください
+const ogImage = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80";
+
+// ヒーロー用スライド
+const slides = [
+  {
+    url: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80",
+    alt: "現場での丁寧な施工と確かな技術"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1920&q=80",
+    alt: "清潔で快適な水回りリフォーム"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80",
+    alt: "安心と信頼の住まいづくり"
+  }
+];
+
+// 施工実績データ
+const worksList = [
+  {
+    category: "給排水衛生工事",
+    title: "商業施設 給排水設備更新工事",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    desc: "老朽化した配管の全面リニューアル。営業への影響を最小限に抑えたスピーディーな施工を実施しました。"
+  },
+  {
+    category: "水回りリフォーム",
+    title: "戸建て住宅 浴室・洗面所フルリフォーム",
+    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
+    desc: "最新の保温システムバスと節水型設備を導入。バリアフリー化にも配慮した快適な水回りに刷新。"
+  },
+  {
+    category: "管工事・土木・水道施設",
+    title: "市道 水道本管配管・切替工事",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    desc: "地域インフラを支える水道本管の布設工事。安全第一で近隣住民の皆様へ配慮しながら施工完了しました。"
+  },
+  {
+    category: "水回りリフォーム",
+    title: "マンション トイレ・キッチン交換工事",
+    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80",
+    desc: "お手入れのしやすい最新システムキッチンとお掃除ラクラクな節水トイレへと交換いたしました。"
+  },
+  {
+    category: "給排水衛生工事",
+    title: "オフィスビル 給水ポンプ配管修繕",
+    image: "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80",
+    desc: "給水加圧ポンプの経年劣化に伴う迅速な交換および各種配管のバイパス切り替え工事を行いました。"
+  },
+  {
+    category: "管工事・土木・水道施設",
+    title: "河川護岸・排水路整備工事",
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
+    desc: "大雨・大雪時の浸水対策として排水路の補強および管渠整備工事を施工いたしました。"
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO 基本タグ -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={siteDescription} />
+    <link rel="canonical" href={siteUrl} />
+
+    <!-- OGP (SNSシェア対策) -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="有限会社 殿岡工務店" />
+    <meta property="og:locale" content="ja_JP" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={siteDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- ローカルビジネス構造化データ (JSON-LD) -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "有限会社 殿岡工務店",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
+        "telephone": "054-245-3698",
+        "faxNumber": "054-247-9805",
+        "address": {
+          "@type": "PostalAddress",
+          "postalCode": "420-0841",
+          "addressRegion": "静岡県",
+          "addressLocality": "静岡市葵区",
+          "streetAddress": "上足洗二丁目4-21-11"
+        },
+        "url": "https://example.com/",
+        "priceRange": "¥¥",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script is:inline src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+      .font-serif-jp {
+        font-family: 'Shippori Mincho', serif;
+      }
+      .font-sans-jp {
+        font-family: 'Noto Sans JP', sans-serif;
+      }
+      /* 画像アニメーション */
+      @keyframes kenburns {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.08); }
+      }
+      .slide-img {
+        opacity: 0;
+        transition: opacity 2000ms ease-in-out;
+      }
+      .slide-img.active {
+        opacity: 1;
+        animation: kenburns 7000ms ease-out forwards;
+      }
+    </style>
+  </head>
+  <body class="bg-stone-50 text-slate-800 font-sans-jp antialiased pb-20 md:pb-0">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-slate-900 flex-shrink-0 flex items-center justify-center font-bold text-lg sm:text-xl text-amber-100 font-serif-jp">
+            殿
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="text-[10px] sm:text-xs text-amber-800 tracking-wider font-semibold truncate">静岡市上下水道局指定工事店</span>
+            <span class="text-base sm:text-xl font-bold font-serif-jp text-slate-900 tracking-wide truncate">有限会社 殿岡工務店</span>
+          </div>
+        </a>
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium tracking-wider text-slate-700">
+          <a href="/" class="hover:text-amber-800 transition-colors py-2 border-b-2 border-amber-800">トップ</a>
+          <a href="#about" class="hover:text-amber-800 transition-colors py-2">当社の想い</a>
+          <a href="#services" class="hover:text-amber-800 transition-colors py-2">事業内容</a>
+          <a href="#works" class="hover:text-amber-800 transition-colors py-2">施工実績</a>
+          <a href="#company" class="hover:text-amber-800 transition-colors py-2">会社概要</a>
+          <a href="#recruit" class="hover:text-amber-800 transition-colors py-2">採用情報</a>
+          <a href="#contact" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-stone-100 font-bold transition-all shadow-md rounded-sm">
+            お問い合わせ
+          </a>
+        </nav>
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-slate-800 hover:text-amber-800 focus:outline-none" aria-label="メニューを開く">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Mobile Drawer Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-stone-200 px-6 py-4 shadow-lg">
+        <nav class="flex flex-col space-y-3 text-sm font-medium text-slate-800">
+          <a href="/" class="py-2 border-b border-stone-100 text-amber-800 font-bold">トップ</a>
+          <a href="#about" class="mobile-link py-2 border-b border-stone-100 hover:text-amber-800">当社の想い</a>
+          <a href="#services" class="mobile-link py-2 border-b border-stone-100 hover:text-amber-800">事業内容</a>
+          <a href="#works" class="mobile-link py-2 border-b border-stone-100 hover:text-amber-800">施工実績</a>
+          <a href="#company" class="mobile-link py-2 border-b border-stone-100 hover:text-amber-800">会社概要</a>
+          <a href="#recruit" class="mobile-link py-2 border-b border-stone-100 hover:text-amber-800">採用情報</a>
+          <a href="#contact" class="mobile-link py-3 bg-slate-900 text-white font-bold text-center mt-2 rounded-sm">お問い合わせ</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[85vh] flex items-center pt-24 sm:pt-28 pb-16 sm:pb-20 border-b border-stone-200 overflow-hidden">
+      <div class="absolute inset-0 z-0 bg-slate-900" id="hero-slideshow">
+        {slides.map((slide, index) => (
+          <div 
+            class={`slide-img absolute inset-0 bg-cover bg-center ${index === 0 ? 'active' : ''}`}
+            style={`background-image: url('${slide.url}');`}
+            aria-label={slide.alt}
+          ></div>
+        ))}
+        <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/50 sm:to-white/30"></div>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2.5 px-3 py-1.5 sm:px-4 sm:py-1.5 bg-amber-950/90 text-amber-100 text-xs tracking-wider sm:tracking-widest font-bold mb-6 sm:mb-8 shadow-sm backdrop-blur-sm rounded-sm">
+            <span class="w-1.5 h-1.5 bg-amber-400 rounded-full"></span>
+            半世紀の実績と信頼
+          </div>
+          
+          <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold font-serif-jp text-slate-900 leading-snug sm:leading-[1.35] mb-6 sm:mb-8">
+            健康に、快適に暮らすために。<br />
+            <span class="text-amber-900">水回りと暮らしを支える確かな技術。</span>
+          </h1>
+          
+          <p class="text-sm sm:text-base md:text-lg text-slate-800 font-medium leading-relaxed mb-8 sm:mb-10 max-w-xl bg-white/70 p-4 border-l-4 border-amber-800 backdrop-blur-sm shadow-sm rounded-r-sm">
+            創業50年。事務所や店舗の給排水工事から一般のご家庭のリフォーム工事まで、静岡の地域に密着し、スピーディーかつ的確に対応いたします。「ありがとう」と言う感謝の気持ちを胸に、安心で快適な暮らしを支えます。
+          </p>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <a href="tel:0542453698" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold text-center transition-all shadow-xl flex items-center justify-center gap-2 sm:gap-3 rounded-sm">
+              <span class="text-lg">📞</span> 054-245-3698
+            </a>
+            <a href="#contact" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-white/90 hover:bg-white text-slate-800 font-bold text-center border border-stone-300 transition-all shadow-md backdrop-blur-md rounded-sm">
+              お問い合わせフォーム
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 z-10 flex gap-2 sm:gap-3">
+        {slides.map((_, index) => (
+          <span class={`slide-dot h-1.5 rounded-full transition-all duration-500 ${index === 0 ? 'bg-amber-800 w-8 sm:w-12' : 'bg-stone-400/70 w-6 sm:w-8'}`}></span>
+        ))}
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-24 bg-white border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <span class="text-amber-800 text-xs font-bold tracking-[0.25em] uppercase block mb-3 font-serif-jp">MESSAGE</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif-jp text-slate-900 tracking-wide">ごあいさつ</h2>
+          <div class="w-12 h-0.5 bg-amber-700 mx-auto mt-4"></div>
+        </div>
+        <div class="max-w-3xl mx-auto bg-stone-50 border border-stone-200 p-6 sm:p-10 md:p-12 leading-relaxed text-slate-700 space-y-5 sm:space-y-6 shadow-sm rounded-sm">
+          <p class="text-base font-medium text-slate-900">
+            有限会社 殿岡工務店のホームページをご覧いただきまして、誠にありがとうございます。
+          </p>
+          <p class="text-sm sm:text-base">
+            弊社は創業50年、事務所や店舗の給排水工事から一般のご家庭のリフォーム工事まで、静岡県のあらゆる地域にて、様々な水道工事に携わってきました。
+          </p>
+          <p class="text-sm sm:text-base">
+            地元密着の豊富な経験と実績を活かして、スピーディー且つ的確に対応いたします。「ありがとう」と言う感謝の気持ちを大切に、これからも皆様の安心で快適な暮らしに貢献してまいります。
+          </p>
+          <div class="pt-6 border-t border-stone-300 text-right font-serif-jp font-bold text-slate-900 leading-normal text-sm sm:text-base">
+            代表取締役 殿岡 明弘<br />
+            専務取締役 殿岡 孝夫
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 sm:py-24 bg-stone-100/70 border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4 sm:gap-6">
+          <div>
+            <span class="text-amber-800 text-xs font-bold tracking-[0.25em] uppercase block mb-3 font-serif-jp">SERVICES</span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif-jp text-slate-900">主な事業内容</h2>
+          </div>
+          <p class="text-slate-600 max-w-md text-xs sm:text-sm leading-relaxed">
+            静岡市上下水道局指定工事店として、給排水工事からリフォーム・土木工事まで幅広く承っております。
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <!-- 1. 給排水衛生工事 -->
+          <a href="#works" class="group bg-white border border-stone-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden rounded-sm">
+            <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+              <img 
+                src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80" 
+                alt="明るい室内で配管を施工する給排水衛生工事" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm text-amber-200 text-xs font-bold px-3 py-1">
+                PLUMBING WORK
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold font-serif-jp text-slate-900 mb-3 sm:mb-4 group-hover:text-amber-800 transition-colors">
+                  給排水衛生工事
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+                  一般住宅をはじめ、ビルや事務所・店舗等の給排水衛生工事全般に対応。新設・配管引込から修理・メンテナンスまで安全・確実に施工します。
+                </p>
+                <ul class="text-xs text-slate-700 space-y-2 border-t border-stone-100 pt-4 mb-6">
+                  <li>• 給排水衛生設備工事</li>
+                  <li>• ビル・店舗・事業所の水道設備工事</li>
+                  <li>• 給水管・排水管の新設・引き込み・修繕</li>
+                </ul>
+              </div>
+              <div class="text-xs font-bold text-amber-800 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                施工実績を見る <span class="text-base">→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 2. 水回りリフォーム -->
+          <a href="#works" class="group bg-white border border-stone-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden rounded-sm">
+            <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+              <img 
+                src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" 
+                alt="水回りリフォーム" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm text-amber-200 text-xs font-bold px-3 py-1">
+                REFORM
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold font-serif-jp text-slate-900 mb-3 sm:mb-4 group-hover:text-amber-800 transition-colors">
+                  水回りリフォーム
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+                  ご家庭のキッチン・浴室・トイレ・洗面所など、毎日の暮らしに直結する水回りのリフォーム工事に伴う配管および設備工事を行います。
+                </p>
+                <ul class="text-xs text-slate-700 space-y-2 border-t border-stone-100 pt-4 mb-6">
+                  <li>• キッチン・浴室・トイレのリフォーム工事</li>
+                  <li>• 老朽化した配管の更新・切替え</li>
+                  <li>• 住宅設備機器の導入・交換</li>
+                </ul>
+              </div>
+              <div class="text-xs font-bold text-amber-800 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                施工実績を見る <span class="text-base">→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 3. 管工事・土木・水道施設 -->
+          <a href="#works" class="group bg-white border border-stone-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden rounded-sm">
+            <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-100">
+              <img 
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" 
+                alt="管工事・土木・水道施設" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm text-amber-200 text-xs font-bold px-3 py-1">
+                PIPE & CIVIL WORK
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold font-serif-jp text-slate-900 mb-3 sm:mb-4 group-hover:text-amber-800 transition-colors">
+                  管工事・土木・水道施設
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+                  建築から土木まで水道に関する工事を全般的に手掛けます。河川工事や公共インフラに関わる施工を通じて地域の安心を支えます。
+                </p>
+                <ul class="text-xs text-slate-700 space-y-2 border-t border-stone-100 pt-4 mb-6">
+                  <li>• 管工事業・水道施設工事業</li>
+                  <li>• 土木工事業・とび土工事業</li>
+                  <li>• 河川工事・インフラ関連工事</li>
+                </ul>
+              </div>
+              <div class="text-xs font-bold text-amber-800 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                施工実績を見る <span class="text-base">→</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Works Section (施工実績) -->
+    <section id="works" class="py-16 sm:py-24 bg-white border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <span class="text-amber-800 text-xs font-bold tracking-[0.25em] uppercase block mb-3 font-serif-jp">WORKS</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif-jp text-slate-900">施工実績</h2>
+          <div class="w-12 h-0.5 bg-amber-700 mx-auto mt-4"></div>
+          <p class="text-slate-600 text-xs sm:text-sm mt-4">
+            これまで手掛けた給排水・水道工事、リフォーム施工の一部をご紹介いたします。
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {worksList.map((item) => (
+            <div class="bg-stone-50 border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-sm flex flex-col">
+              <div class="relative h-48 overflow-hidden bg-stone-200">
+                <img src={item.image} alt={item.title} class="w-full h-full object-cover" />
+                <span class="absolute top-3 left-3 bg-slate-900/90 text-white text-[11px] font-bold px-2.5 py-1">
+                  {item.category}
+                </span>
+              </div>
+              <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-base sm:text-lg font-bold font-serif-jp text-slate-900 mb-2 sm:mb-3 leading-snug">
+                    {item.title}
+                  </h3>
+                  <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Company Profile -->
+    <section id="company" class="py-16 sm:py-24 bg-stone-100/70 border-b border-stone-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16">
+          <span class="text-amber-800 text-xs font-bold tracking-[0.25em] uppercase block mb-3 font-serif-jp">COMPANY</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif-jp text-slate-900">会社概要</h2>
+          <div class="w-12 h-0.5 bg-amber-700 mx-auto mt-4"></div>
+        </div>
+        <div class="bg-white border border-stone-200 p-6 sm:p-10 md:p-12 shadow-sm rounded-sm">
+          <dl class="divide-y divide-stone-200 text-xs sm:text-sm">
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">会社名</dt>
+              <dd class="sm:col-span-2 text-slate-700">有限会社 殿岡工務店</dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">役員構成</dt>
+              <dd class="sm:col-span-2 text-slate-700">代表取締役 殿岡 明弘 / 専務取締役 殿岡 孝夫</dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">所在地</dt>
+              <dd class="sm:col-span-2 text-slate-700 space-y-3">
+                <p>〒420-0841 静岡県静岡市葵区上足洗二丁目4-21-11</p>
+                <!-- Googleマップ埋め込み -->
+                <div class="w-full h-64 sm:h-72 rounded-sm overflow-hidden border border-stone-300 shadow-sm">
+                  <iframe 
+                    src="https://maps.google.com/maps?output=embed&q=静岡県静岡市葵区上足洗二丁目4-21-11" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="有限会社 殿岡工務店 アクセスマップ"
+                  ></iframe>
+                </div>
+              </dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">電話番号 / FAX</dt>
+              <dd class="sm:col-span-2 text-slate-700">TEL：054-245-3698 / FAX：054-247-9805</dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">事業内容</dt>
+              <dd class="sm:col-span-2 text-slate-700 leading-relaxed">
+                水道設備・リフォーム・管工事<br />
+                一般住宅およびビル等の給排水衛生工事<br />
+                建築から土木まで水道に関する工事全般
+              </dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">許認可等</dt>
+              <dd class="sm:col-span-2 text-slate-700 leading-relaxed">
+                静岡市上下水道局指定工事店<br />
+                静岡県知事許可（般-22）第1298号<br />
+                （土木工事業 / とび・土工工事業 / 管工事業 / 水道施設工事業）
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recruit Section -->
+    <section id="recruit" class="py-16 sm:py-24 bg-white border-b border-stone-200">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16">
+          <span class="text-amber-800 text-xs font-bold tracking-[0.25em] uppercase block mb-3 font-serif-jp">RECRUIT</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif-jp text-slate-900">採用情報</h2>
+          <div class="w-12 h-0.5 bg-amber-700 mx-auto mt-4"></div>
+          <p class="text-slate-600 text-xs sm:text-sm mt-6 leading-relaxed">
+            静岡市で50年。地域密着で水道インフラを支える職人を募集しています。<br class="hidden md:inline"/>
+            経験者・未経験者問わず、やる気と人柄を重視。一生ものの技術を身に付けませんか？
+          </p>
+        </div>
+        <div class="bg-stone-50 border border-stone-200 p-6 sm:p-10 md:p-12 shadow-sm rounded-sm">
+          <div class="flex flex-wrap items-center gap-2.5 mb-6 border-b border-stone-200 pb-4">
+            <span class="px-2.5 py-1 bg-amber-800 text-white text-xs font-bold font-serif-jp rounded-sm">正社員</span>
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold font-serif-jp text-slate-900">現場スタッフ（配管工・水道設備工事）</h3>
+          </div>
+          <dl class="divide-y divide-stone-200 text-xs sm:text-sm">
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">仕事内容</dt>
+              <dd class="sm:col-span-2 text-slate-700 leading-relaxed">
+                静岡市内の住宅・ビル・店舗における給排水衛生設備の施工・配管工事・メンテナンス業務を担当します。
+              </dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">給与</dt>
+              <dd class="sm:col-span-2 text-slate-700 leading-relaxed">
+                月給 201,000円 〜 366,000円
+                <span class="block text-xs text-slate-600 mt-0.5">※経験・能力・資格等を考慮のうえ決定いたします。</span>
+              </dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">休日・休暇</dt>
+              <dd class="sm:col-span-2 text-slate-700 leading-relaxed">
+                日曜、祝日、第二土曜日
+                <span class="block text-xs text-slate-600 mt-0.5">※夏季休暇、年末年始休暇あり</span>
+              </dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">応募資格</dt>
+              <dd class="sm:col-span-2 text-slate-700 leading-relaxed">
+                未経験歓迎！ 学歴・年齢不問<br />
+                ※要普通自動車免許（AT限定可）<br />
+                ※有資格者（配管工、施工管理技士等）や経験者は優遇いたします。
+              </dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">勤務地</dt>
+              <dd class="sm:col-span-2 text-slate-700 leading-relaxed">
+                静岡県静岡市葵区上足洗二丁目4-21-11（現場は静岡市内および近郊エリア）
+              </dd>
+            </div>
+            <div class="py-3.5 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-2">
+              <dt class="font-bold text-slate-900 font-serif-jp">待遇・福利厚生</dt>
+              <dd class="sm:col-span-2 text-slate-700 leading-relaxed">
+                社会保険完備 / 昇給あり / 賞与あり / 交通費支給 / 資格取得支援制度あり / 制服貸与
+              </dd>
+            </div>
+          </dl>
+          <div class="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-stone-200 text-center">
+            <p class="font-serif-jp font-bold text-slate-900 text-sm sm:text-base mb-2">ご応募・現場見学のお問い合わせ</p>
+            <p class="text-xs text-slate-600 mb-6">お電話（054-245-3698）または下記フォームより「採用の件で」とお気軽にご連絡ください。</p>
+            <a href="#contact" class="inline-block px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm transition-colors shadow-sm rounded-sm">
+              応募・お問い合わせをする
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 sm:py-24 bg-slate-900 text-white">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+        <span class="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase block mb-3 font-serif-jp">CONTACT</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold font-serif-jp mb-4 sm:mb-6">お問い合わせ</h2>
+        <p class="text-stone-300 text-xs sm:text-sm mb-8 sm:mb-12 leading-relaxed">
+          水道工事・給排水工事・リフォームに関するご質問、求人のご応募やお見積りは、お電話（054-245-3698）または下記フォームよりお気軽にお問い合わせください。
+        </p>
+        <!-- お問い合わせフォーム -->
+        <form 
+          action="https://formsubmit.co/tonooka-koumuten@kdr.biglobe.ne.jp" 
+          method="POST" 
+          class="bg-white text-slate-800 p-6 sm:p-8 md:p-10 text-left shadow-2xl space-y-4 sm:space-y-5 rounded-sm"
+        >
+          <!-- FormSubmit 設定 -->
+          <input type="hidden" name="_subject" value="【HPよりお問い合わせ】有限会社 殿岡工務店" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <div>
+            <label for="contact-name" class="block text-xs font-bold text-slate-700 mb-1.5">お名前 <span class="text-red-600">*</span></label>
+            <input type="text" id="contact-name" name="お名前" required placeholder="例：殿岡 太郎" class="w-full bg-stone-50 border border-stone-300 px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-slate-900 rounded-sm" />
+          </div>
+          <div>
+            <label for="contact-info" class="block text-xs font-bold text-slate-700 mb-1.5">ご連絡先（電話番号またはメール） <span class="text-red-600">*</span></label>
+            <input type="text" id="contact-info" name="ご連絡先" required placeholder="例：054-245-XXXX / info@example.com" class="w-full bg-stone-50 border border-stone-300 px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-slate-900 rounded-sm" />
+          </div>
+          <div>
+            <label for="contact-message" class="block text-xs font-bold text-slate-700 mb-1.5">ご相談内容</label>
+            <textarea id="contact-message" name="ご相談内容" rows="4" placeholder="工事のご相談、または採用応募など、ご自由にご記入ください" class="w-full bg-stone-50 border border-stone-300 px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-slate-900 rounded-sm"></textarea>
+          </div>
+          <button type="submit" class="w-full py-3.5 sm:py-4 bg-amber-800 hover:bg-amber-900 text-white font-bold font-serif-jp text-sm sm:text-base transition-all shadow-md cursor-pointer rounded-sm">
+            送信する
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 sm:py-10 bg-slate-950 text-stone-400 text-xs border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+        <div>
+          <p class="text-white font-bold font-serif-jp text-sm mb-1">有限会社 殿岡工務店</p>
+          <p class="text-[11px] sm:text-xs">〒420-0841 静岡県静岡市葵区上足洗二丁目4-21-11 / 静岡市上下水道局指定工事店</p>
+        </div>
+        <p class="text-[11px] sm:text-xs">&copy; Tonooka Komuten Co., Ltd. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Mobile Floating Bar -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 p-2 bg-white border-t border-stone-300 flex gap-2 shadow-lg">
+      <a href="tel:0542453698" class="flex-1 py-3 bg-slate-900 text-white font-bold text-center text-xs flex items-center justify-center gap-1 rounded-sm">
+        📞 電話する (054-245-3698)
+      </a>
+      <a href="#contact" class="flex-1 py-3 bg-amber-800 text-white font-bold text-center text-xs flex items-center justify-center gap-1 rounded-sm">
+        ✉️ お問い合わせ
+      </a>
+    </div>
+
+    <!-- Scripts -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+          });
+
+          mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+              mobileMenu.classList.add('hidden');
+            });
+          });
+        }
+
+        // Slideshow Logic
+        const slides = document.querySelectorAll('.slide-img');
+        const dots = document.querySelectorAll('.slide-dot');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        function changeSlide() {
+          if (!slides.length) return;
+          slides[currentIndex].classList.remove('active');
+          dots[currentIndex].classList.remove('bg-amber-800', 'w-8', 'sm:w-12');
+          dots[currentIndex].classList.add('bg-stone-400/70', 'w-6', 'sm:w-8');
+
+          currentIndex = (currentIndex + 1) % totalSlides;
+
+          slides[currentIndex].classList.add('active');
+          dots[currentIndex].classList.remove('bg-stone-400/70', 'w-6', 'sm:w-8');
+          dots[currentIndex].classList.add('bg-amber-800', 'w-8', 'sm:w-12');
+        }
+
+        if (totalSlides > 1) {
+          setInterval(changeSlide, 5000);
+        }
+      });
+    </script>
+  </body>
+</html>
